@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listArticleFragment">
+
+    <fragment
+        android:id="@+id/listArticleFragment"
+        android:name="com.example.newsreaderfactory.MVP.view.ListArticleFragment"
+        android:label="Factory news"
+        tools:layout="@layout/fragment_list_article">
+        <action
+            android:id="@+id/action_listArticleFragment_to_detailArticleFragment"
+            app:destination="@id/detailArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/detailArticleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailArticleFragment"
+        android:name="com.example.newsreaderfactory.MVP.view.DetailArticleFragment"
+        android:label="Factory news"
+        tools:layout="@layout/fragment_detail_article">
+        <action
+            android:id="@+id/action_detailArticleFragment_to_listArticleFragment"
+            app:destination="@id/listArticleFragment" />
+    </fragment>
+</navigation>
