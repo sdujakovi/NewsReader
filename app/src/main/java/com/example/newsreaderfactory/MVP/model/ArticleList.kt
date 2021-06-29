@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ArticleList(
     @SerializedName("articles")
-    val articles: List<Article>,
+    val articles: ArrayList<Article>,
     @SerializedName("sortBy")
     val sortBy: String,
     @SerializedName("source")

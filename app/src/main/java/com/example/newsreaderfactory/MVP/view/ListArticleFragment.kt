@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.newsreaderfactory.MVP.model.Article
 import com.example.newsreaderfactory.MVP.presenter.ArticlePresenter
 import com.example.newsreaderfactory.R
@@ -33,19 +34,17 @@ class ListArticleFragment : Fragment(R.layout.fragment_list_article), ArticleInt
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         userPreferences = UserPreferences(requireContext())
-        presenter = ArticlePresenter(this)
-        presenter.getData()
-
-
         val view: View = inflater.inflate(R.layout.fragment_list_article, container, false)
         prog = view.findViewById(R.id.prgoress_bar)
 
         return view
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        presenter = ArticlePresenter(this, requireContext())
+        presenter.getData()
+    }
 
     override fun showLoading() {
         prog?.visibility = View.VISIBLE
@@ -73,13 +72,18 @@ class ListArticleFragment : Fragment(R.layout.fragment_list_article), ArticleInt
         val adapter = ListArticleAdapter(data, articleItemListener)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
+
         article_recycler_view.adapter = adapter
         article_recycler_view.layoutManager = layoutManager
         (article_recycler_view.adapter as ListArticleAdapter).notifyDataSetChanged()
     }
 
-    private val articleItemListener = ListArticleAdapter.OnClickListener{ article ->
-        val action = ListArticleFragmentDirections.actionListArticleFragmentToDetailArticleFragment()
+
+
+    private val articleItemListener = ListArticleAdapter.OnClickListener{
+        val action = ListArticleFragmentDirections.actionListArticleFragmentToDetailArticleFragment(
+            it.id
+        )
         findNavController().navigate(action)
     }
 }

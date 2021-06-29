@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.newsreaderfactory.MVP.model.Article
+import com.example.newsreaderfactory.MVP.model.Converters
 import com.example.newsreaderfactory.service.API
 
 @Database(entities = arrayOf(Article::class), version = 3)
+@TypeConverters(Converters::class)
 abstract class MyDatabase : RoomDatabase() {
 
     abstract fun articleDao() : DAO

@@ -18,15 +18,20 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/detailArticleFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/detailArticleFragment"
         android:name="com.example.newsreaderfactory.MVP.view.DetailArticleFragment"
         android:label="Factory news"
+
         tools:layout="@layout/fragment_detail_article">
         <action
             android:id="@+id/action_detailArticleFragment_to_listArticleFragment"
             app:destination="@id/listArticleFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>
