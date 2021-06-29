@@ -27,7 +27,6 @@ class ListArticleFragment : Fragment(R.layout.fragment_list_article), ArticleInt
     lateinit var presenter: ArticlePresenter
     var prog: ProgressBar? = null
     private lateinit var userPreferences: UserPreferences
-    val database: MyDatabase = MyDatabase.getInstance(requireContext())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,23 +35,8 @@ class ListArticleFragment : Fragment(R.layout.fragment_list_article), ArticleInt
     ): View? {
 
         userPreferences = UserPreferences(requireContext())
-        if(database.articleDao().selectAllArticle().isNullOrEmpty()){
-            presenter = ArticlePresenter(this)
-            presenter.getData()
-        }
-
-
-
-        //provjerit jel ima u bazi
-        //ako nema
-            //presenter = ArticlePresenter(this)
-            //presenter.getData()
-            //pohranit datetime
-        //ako ima
-            //provjerit datetime manji od 5min
-                //dohvatit iz baze podatke
-            //ako je veci
-                //presenter.getData()
+        presenter = ArticlePresenter(this)
+        presenter.getData()
 
 
         val view: View = inflater.inflate(R.layout.fragment_list_article, container, false)
