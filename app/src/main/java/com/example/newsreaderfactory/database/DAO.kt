@@ -12,12 +12,6 @@ interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertArticles(articles: List<Article>)
 
-    @Delete
-    fun deleteArticle(article: Article): Int
-
     @Query("SELECT * from Article")
     fun selectAllArticle(): MutableList<Article>
-
-    @Query("DELETE FROM Article")
-    fun deleteAllArticle()
 }

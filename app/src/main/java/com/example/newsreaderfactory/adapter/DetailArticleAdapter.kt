@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.newsreaderfactory.MVP.model.Article
+import com.example.newsreaderfactory.MVP.view.DetailArticleFragment
 import com.example.newsreaderfactory.MVP.view.DetailArticleFragmentArgs
 import com.example.newsreaderfactory.R
 import com.google.android.material.appbar.AppBarLayout
@@ -23,7 +24,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailArticleAdapter(val articleList: List<Article>)
     :RecyclerView.Adapter<DetailArticleAdapter.DetailViewHolder>(){
-
 
     class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val view_title = itemView.findViewById<TextView>(R.id.title_view_pager)
@@ -43,7 +43,9 @@ class DetailArticleAdapter(val articleList: List<Article>)
         parent: ViewGroup,
         viewType: Int
     ): DetailArticleAdapter.DetailViewHolder {
-        return DetailArticleAdapter.DetailViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.detail_item, parent, false))
+        return DetailArticleAdapter.DetailViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.detail_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: DetailArticleAdapter.DetailViewHolder, position: Int) {
@@ -54,6 +56,4 @@ class DetailArticleAdapter(val articleList: List<Article>)
     override fun getItemCount(): Int {
         return articleList.size
     }
-
-
 }

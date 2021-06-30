@@ -17,7 +17,6 @@ import com.example.newsreaderfactory.R
 class ListArticleAdapter(val articleList: List<Article>, val onClickListener: OnClickListener)
     : RecyclerView.Adapter<ListArticleAdapter.ViewHolder>(){
 
-
     class ViewHolder(item: View): RecyclerView.ViewHolder(item) {
         val view_title = item.findViewById<TextView>(R.id.card_view_title)
         val view_story = item.findViewById<TextView>(R.id.card_view_story)
@@ -28,15 +27,12 @@ class ListArticleAdapter(val articleList: List<Article>, val onClickListener: On
             onClickListener: OnClickListener
         ){
             val split = article.title.split(":")
+            val shader =    LinearGradient(0f, 0f, 0f,view_story.textSize + 180f,
+                            Color.GRAY, Color.WHITE , Shader.TileMode.CLAMP)
+            view_story.paint.shader = shader
 
             view_title.text = split[0]
             view_story.text = article.description
-
-            val shader =    LinearGradient(0f, 0f, 0f,view_story.textSize + 180f,
-                Color.GRAY, Color.WHITE , Shader.TileMode.CLAMP)
-
-            view_story.paint.shader = shader
-
             Glide.with(itemView.context).load(article.urlToImage).into(view_image)
 
             itemView.setOnClickListener{
@@ -61,7 +57,4 @@ class ListArticleAdapter(val articleList: List<Article>, val onClickListener: On
     class OnClickListener(val clickListener: (article: Article) -> Unit) {
         fun onClick(article: Article) = clickListener(article)
     }
-
-
-
 }

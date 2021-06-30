@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.parcel.Parcelize
 import java.lang.reflect.Type
 
-
 @Entity
 @Parcelize
 data class Article(

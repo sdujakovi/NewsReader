@@ -28,9 +28,6 @@ interface API {
             val client = OkHttpClient.Builder()
                 .addInterceptor(icp)
                 .addNetworkInterceptor(StethoInterceptor())
-                .connectTimeout(40, TimeUnit.SECONDS)
-                .writeTimeout(40, TimeUnit.SECONDS)
-                .readTimeout(40, TimeUnit.SECONDS)
                 .build()
 
             val retrofit = Retrofit.Builder()

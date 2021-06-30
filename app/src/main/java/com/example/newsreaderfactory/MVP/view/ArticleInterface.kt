@@ -7,5 +7,4 @@ interface ArticleInterface {
     fun hideLoading()
     fun showError(msg: String)
     fun showResult(result: Any)
-
 }

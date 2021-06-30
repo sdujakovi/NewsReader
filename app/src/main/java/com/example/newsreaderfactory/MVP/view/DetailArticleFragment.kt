@@ -24,15 +24,11 @@ class DetailArticleFragment : Fragment(R.layout.fragment_detail_article), Articl
 
     private val args: DetailArticleFragmentArgs by navArgs()
     lateinit var presenter: ArticlePresenter
-    var prog: ProgressBar? = null
+    var progress_bar: ProgressBar? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_detail_article, container, false)
-        prog = view.findViewById(R.id.prgoress_bar_pv)
+        progress_bar = view.findViewById(R.id.prgoress_bar_pv)
         return view
     }
 
@@ -42,30 +38,29 @@ class DetailArticleFragment : Fragment(R.layout.fragment_detail_article), Articl
     }
 
     override fun showLoading() {
-        prog?.visibility = View.VISIBLE
+        progress_bar?.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        prog?.visibility = View.GONE
+        progress_bar?.visibility = View.GONE
     }
 
     override fun showError(msg: String) {
         val ad: AlertDialog = AlertDialog.Builder(context).create()
-        ad.setCancelable(false)
-        ad.setTitle("Greška!")
-        ad.setMessage(msg)
-        ad.setButton("Ok",
-            DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
-        ad.show()
+            ad.setCancelable(false)
+            ad.setTitle("Greška!")
+            ad.setMessage(msg)
+            ad.setButton("Ok", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+            ad.show()
     }
 
     override fun showResult(result: Any) {
-        detail_view_pager.visibility = View.VISIBLE
         val data = result as ArrayList<Article>
         val adapter = DetailArticleAdapter(data)
         detail_view_pager.adapter = adapter
-        detail_view_pager.offscreenPageLimit = 10
-        detail_view_pager.setCurrentItem(args.id-1, true)
-    }
 
+        //TODO smoothScroll je fora ali nekad zeza vjv zbog offscreenPageLimit-a
+        detail_view_pager.offscreenPageLimit = 10
+        detail_view_pager.setCurrentItem(args.id-1, false)
+    }
 }
