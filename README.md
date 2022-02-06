@@ -1,4 +1,4 @@
-# Factory News Reader
+# News Reader
 
 ## Aplikacija za pregled vijesti
 
